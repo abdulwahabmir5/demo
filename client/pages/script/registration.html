@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Performance Analytics - Registration</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Poppins',sans-serif;
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#eef2ff,#f8fbff);
+            overflow:hidden;
+            position:relative;
+        }
+
+        /* Background Decorative Shapes */
+        body::before{
+            content:'';
+            position:absolute;
+            width:450px;
+            height:450px;
+            background:rgba(79,70,229,0.12);
+            border-radius:50%;
+            top:-150px;
+            right:-120px;
+        }
+
+        body::after{
+            content:'';
+            position:absolute;
+            width:350px;
+            height:350px;
+            background:rgba(124,58,237,0.10);
+            border-radius:50%;
+            bottom:-120px;
+            left:-100px;
+        }
+
+        /* =========================
+           REGISTER CARD
+        ========================== */
+        .register-container{
+            width:100%;
+            max-width:450px;
+            background:rgba(255,255,255,0.88);
+            backdrop-filter:blur(18px);
+            border:1px solid rgba(255,255,255,0.4);
+            border-radius:28px;
+            padding:40px;
+            box-shadow:0 20px 50px rgba(0,0,0,0.08);
+            position:relative;
+            z-index:10;
+            animation:fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn{
+            from{
+                opacity:0;
+                transform:translateY(20px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        /* Logo */
+        .logo-box{
+            width:85px;
+            height:85px;
+            margin:0 auto 20px;
+            border-radius:22px;
+            background:linear-gradient(135deg,#4f46e5,#7c3aed);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:white;
+            font-size:34px;
+            box-shadow:0 12px 30px rgba(79,70,229,0.35);
+        }
+
+        h2{
+            text-align:center;
+            font-size:30px;
+            margin-bottom:8px;
+            color:#111827;
+            font-weight:700;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#6b7280;
+            font-size:14px;
+            margin-bottom:32px;
+        }
+
+        /* =========================
+           FORM
+        ========================== */
+        .form-group{
+            margin-bottom:22px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:8px;
+            color:#374151;
+            font-size:14px;
+            font-weight:600;
+        }
+
+        .input-box{
+            position:relative;
+        }
+
+        .input-box i{
+            position:absolute;
+            top:50%;
+            left:15px;
+            transform:translateY(-50%);
+            color:#9ca3af;
+            font-size:15px;
+        }
+
+        input,
+        select{
+            width:100%;
+            padding:14px 16px 14px 46px;
+            border-radius:14px;
+            border:1px solid #d1d5db;
+            background:#fff;
+            font-size:15px;
+            transition:0.3s ease;
+            outline:none;
+            appearance:none;
+        }
+
+        input:focus,
+        select:focus{
+            border-color:#4f46e5;
+            box-shadow:0 0 0 4px rgba(79,70,229,0.12);
+        }
+
+        /* Custom Select Arrow */
+        .select-wrapper{
+            position:relative;
+        }
+
+        .select-wrapper::after{
+            content:'\f078';
+            font-family:"Font Awesome 6 Free";
+            font-weight:900;
+            position:absolute;
+            right:18px;
+            top:50%;
+            transform:translateY(-50%);
+            color:#6b7280;
+            pointer-events:none;
+            font-size:13px;
+        }
+
+        /* Button */
+        button{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:14px;
+            background:linear-gradient(135deg,#4f46e5,#7c3aed);
+            color:white;
+            font-size:16px;
+            font-weight:600;
+            cursor:pointer;
+            transition:0.3s ease;
+            margin-top:10px;
+        }
+
+        button:hover{
+            transform:translateY(-2px);
+            box-shadow:0 12px 25px rgba(79,70,229,0.35);
+        }
+
+        /* Login Link */
+        .register-link{
+            margin-top:22px;
+            text-align:center;
+            font-size:14px;
+            color:#6b7280;
+        }
+
+        .register-link a{
+            color:#4f46e5;
+            font-weight:600;
+            text-decoration:none;
+        }
+
+        .register-link a:hover{
+            text-decoration:underline;
+        }
+
+        /* Message Box */
+        #message{
+            margin-top:20px;
+            padding:14px;
+            border-radius:14px;
+            display:none;
+            text-align:center;
+            font-size:14px;
+            font-weight:600;
+            animation:fadeIn 0.3s ease;
+        }
+
+        .success{
+            background:#dcfce7;
+            color:#166534;
+            border:1px solid #bbf7d0;
+        }
+
+        .error{
+            background:#fee2e2;
+            color:#991b1b;
+            border:1px solid #fecaca;
+        }
+
+        /* Footer */
+        .footer-text{
+            margin-top:28px;
+            text-align:center;
+            color:#9ca3af;
+            font-size:12px;
+        }
+
+        /* Responsive */
+        @media(max-width:500px){
+
+            .register-container{
+                margin:20px;
+                padding:30px 24px;
+            }
+
+            h2{
+                font-size:24px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         REGISTRATION CONTAINER
+    ========================== -->
+    <div class="register-container">
+
+        <!-- Logo -->
+        <div class="logo-box">
+            <i class="fa-solid fa-user-plus"></i>
+        </div>
+
+        <h2>Create Account</h2>
+
+        <p class="subtitle">
+            Register to access the Student Analytics Platform
+        </p>
+
+        <!-- Registration Form -->
+        <form id="registrationForm">
+
+            <!-- Username -->
+            <div class="form-group">
+
+                <label for="username">Username</label>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-user"></i>
+
+                    <input
+                        type="text"
+                        id="username"
+                        required
+                        placeholder="e.g. hassan_ali"
+                    />
+                </div>
+
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+
+                <label for="password">Password</label>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        required
+                        placeholder="••••••••"
+                    />
+                </div>
+
+            </div>
+
+            <!-- Role Selection -->
+            <div class="form-group">
+
+                <label for="role">System Role</label>
+
+                <div class="select-wrapper">
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-user-shield"></i>
+
+                        <select id="role">
+
+                            <option value="student">
+                                Student
+                            </option>
+
+                            <option value="faculty">
+                                Faculty
+                            </option>
+
+                            <option value="admin">
+                                Administrator
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">
+                <i class="fa-solid fa-user-check"></i>
+                Create Account
+            </button>
+
+            <!-- Login Link -->
+            <div class="register-link">
+                Already have an account?
+                <a href="login.html">Login Here</a>
+            </div>
+
+        </form>
+
+        <!-- Response Message -->
+        <div id="message"></div>
+
+        <!-- Footer -->
+        <div class="footer-text">
+            © 2026 Student Performance Analytics System
+        </div>
+
+    </div>
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+    <script>
+
+        document.getElementById('registrationForm')
+         .addEventListener('submit', function (event) {
+
+        event.preventDefault();
+
+        const username =
+        document.getElementById('username').value;
+ 
+        const password =
+             document.getElementById('password').value;
+
+        const role =
+             document.getElementById('role').value;
+
+        localStorage.setItem('registeredUsername', username);
+        localStorage.setItem('registeredPassword', password);
+        localStorage.setItem('registeredRole', role);
+
+        const messageDiv =
+            document.getElementById('message');
+
+        messageDiv.textContent =
+            "Registration Successful! Redirecting to Login...";
+
+        messageDiv.className = 'success';
+        messageDiv.style.display = 'block';
+
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 1500);
+
+     });
+
+                // Success
+             if (response.status === 201) {
+
+                 messageDiv.textContent =
+                result.message || "Registration successful! Redirecting to login...";
+
+                 messageDiv.className = 'success';
+                messageDiv.style.display = 'block';
+
+                document.getElementById('registrationForm').reset();
+
+                setTimeout(() => {
+                window.location.href = 'login.html';
+                }, 1500);
+            } else {
+
+                    // Backend Errors
+                    messageDiv.textContent =
+                        result.error ||
+                        "An error occurred during registration.";
+
+                    messageDiv.className = 'error';
+                    messageDiv.style.display = 'block';
+
+
+                console.error('Network Error:', error);
+
+                messageDiv.textContent =
+                    "Could not connect to the authentication server.";
+
+                messageDiv.className = 'error';
+                messageDiv.style.display = 'block';
+            }
+
+   
+
+    </script>
+
+</body>
+</html>
